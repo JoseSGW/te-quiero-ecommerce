@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {CategoryButton, CategoryFilterContainer, CategoryType, CategoryInput, FilteringElements} from './CategoryFilter.styles';
+import { CategoryFilterContainer, CategoryType, CategoryInput, FilteringElements} from './CategoryFilter.styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { showCategories } from "../../actions/categories";
 import { loadFilteredProducts, startLoadingProducts } from "../../actions/products";
 import { useHistory, useLocation } from 'react-router-dom';
 

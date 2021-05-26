@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { BackButton, BottomSection, Header, Nav, TopRight, TopSection } from './AdminHeader.styles'
+import { BottomSection, Header, Nav, TopRight, TopSection } from './AdminHeader.styles'
 
 import logo from '../../img/Marca.png';
 import { useSelector } from 'react-redux';

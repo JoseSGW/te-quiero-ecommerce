@@ -1,11 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { Container } from "./CheckOut.styled";
 
 export default function CheckOut({ total, totalprice }) {
-  let navigate = useHistory();
+
   const user = useSelector((state) => state.users.user);
   const cart = useSelector((state) => state.products.cart);
 

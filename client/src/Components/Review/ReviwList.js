@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ContainerReviews } from "./ReviewList.styles";
 import Review from './Review'
 import { useSelector, useDispatch } from "react-redux";

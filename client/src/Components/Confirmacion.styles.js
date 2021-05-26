@@ -14,7 +14,7 @@ span{
     margin-bottom:10%;
     background-color: #E4FCDB;
     width:30%;
-
+}
 div {
     
     display:flex;
@@ -27,8 +27,7 @@ div {
     button{
         border: 2px solid #36825B;
         background-color:transparent;
-        padding:10px ;
-                  
+        padding:10px;                
         margin:5% 30%;
         border-radius:4px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

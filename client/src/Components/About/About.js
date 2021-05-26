@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { AboutContainer, Card, CardsContainer, Content } from "./About.styles";
 import Italo from "../../img/Italo.jpg";
 import JoseH from "../../img/JoseH.jpg";

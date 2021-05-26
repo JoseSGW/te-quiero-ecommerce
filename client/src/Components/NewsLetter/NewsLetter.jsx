@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import { BoxContainer } from "./NewsLetter.styles";
 import cuchara from '../../img/cuchara.png';
 import { store } from 'react-notifications-component';

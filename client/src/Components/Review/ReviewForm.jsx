@@ -8,9 +8,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 // import GradeIcon from '@material-ui/icons/Grade';
 import { addReview, updateReview } from "../../actions/reviewsActions";
-import { get_reviews, showReviewModalActn } from "../../actions/reviewsActions";
+import { showReviewModalActn } from "../../actions/reviewsActions";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
 export default function ReviewForm() {
   const { showReviewModal } = useSelector((state) => state.reviews);

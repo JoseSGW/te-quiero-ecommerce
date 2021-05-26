@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import {
     Card,
     Etiquetas,

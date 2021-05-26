@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast, Zoom, Slide, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { store } from 'react-notifications-component';
 

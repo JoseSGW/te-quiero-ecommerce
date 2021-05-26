@@ -5,9 +5,8 @@ import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useEffect } from "react";
-import { setProducts, startLoadingProducts } from "../../actions/products";
+import { startLoadingProducts } from "../../actions/products";
 import Loading from "../Loading/Loading";
-import { searchProduct } from "../../actions/products";
 import { showCategories } from "../../actions/categories";
 import { showIngredients } from "../../actions/ingredients";
 

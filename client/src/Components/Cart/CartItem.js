@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import { removeFromCart, adjustQuantity, addToCart, removeItemDB } from "../../actions/shoppingActions";
 import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";

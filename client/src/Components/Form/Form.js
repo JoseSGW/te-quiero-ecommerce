@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { showCategories } from "../../actions/categories";
-import { showIngredients } from "../../actions/ingredients";
 import { addProd } from "../../actions/createProd";
 import { ShowForm } from "./Form.styles";
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchProduct } from "../../actions/products";
 import { useHistory } from "react-router-dom";
-import { Chan, SearchBar } from "./SearchForm.styled";
+import { SearchBar } from "./SearchForm.styled";
 import Autocomplete from "react-autocomplete";
 
 export default function SearchForm() {

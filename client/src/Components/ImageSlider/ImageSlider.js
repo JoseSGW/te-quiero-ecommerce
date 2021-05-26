@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { SliderData } from "./SliderData";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
-import { Slider, LeftArrow, RightArrow, Image, Cont } from "./ImageSlider.styled";
+import { Slider, LeftArrow, RightArrow, Cont } from "./ImageSlider.styled";
 import "./slider.css";
 
 export default function ImageSlider({ slides }) {

@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { Imagen, Texto, Container, EditionIcon, ReviewModal } from "./Review.styled";
 import { useSelector, useDispatch } from "react-redux";
 import GradeIcon from '@material-ui/icons/Grade';
 import EditIcon from '@material-ui/icons/Edit';
 import ReviewForm from "./ReviewForm";
-import { showReviewModal, showReviewModalActn } from "../../actions/reviewsActions";
+import {  showReviewModalActn } from "../../actions/reviewsActions";
 
 export default function Review({id, rating, description, userId, name}) {
     const dispatch = useDispatch();
