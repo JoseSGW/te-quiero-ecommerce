@@ -4,7 +4,6 @@ import axios from "axios"
 export const addToWishlist = (itemId, userId) => {
        return async(dispatch, getState)=> {
         const wishArray = getState().products.wishes;
-        console.log(wishArray)
 
         const element = wishArray.find(wish => itemId === wish.product_id)
             
@@ -71,7 +70,6 @@ export const getAllWishes = (userId)=>{
 
 
 export const addWishes= (products)=>{
-    console.log("esto va al reducer",products)
     return {        
         type: types.ALL_WISHLIST,
         payload:  products,

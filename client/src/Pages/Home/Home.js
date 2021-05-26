@@ -92,22 +92,6 @@ export default function Home() {
     });
   };
 
-  // useEffect(() => {
-  //   if (products.length > 0) {
-  //     console.log("useEffect (84):: products: ", products);
-  //   } else {
-  //     console.log("useEffect (87):: products: ", products);
-  //     dispatch(startLoadingProducts());
-  //   }
-
-  //   user.id && dispatch(loadUserFeaturedProducts(user.id));
-
-  //   console.log(`aquí estoy ${products.length}`);
-  //   setUserFeaturedProductsArr(userFeaturedProducts);
-  //   userFeaturedProducts.forEach((product) =>
-  //     console.log("useEffect:: product.id: ", product.id)
-  //   );
-  // }, [products, user]);
 
   useEffect(() => {
     dispatch(startLoadingProducts());

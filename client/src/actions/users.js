@@ -19,7 +19,6 @@ export function showUsers() {
 }
 
 export const setUser = (name, id, admin) => {
-    console.log(name, id, admin);
     return {
         type: types.setUser,
         payload: {
@@ -58,7 +57,6 @@ export const logout = () => {
     return async function (dispatch) {
         try {
             const response = await fetch("http://localhost:3001/auth/logout");
-            console.log("Estoy en el logout");
             dispatch(logOutUser());
         } catch (error) {
             console.log(error);
@@ -143,7 +141,6 @@ export const getCountries = () => {
                 "https://restcountries.eu/rest/v2/all"
             );
             const jsonData = await response.json();
-            console.log(jsonData);
             return dispatch({
                 type: types.getAllCountries,
                 payload: jsonData,

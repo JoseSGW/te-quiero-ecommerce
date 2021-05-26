@@ -31,7 +31,6 @@ export default function CategoryIngredientCreateEdit(props) {
     let oldName = catOrIng.name
 
     title = title.charAt(0).toUpperCase() + title.slice(1);
-                // console.log('CategoryCreateEdit(7):: show: ', props.location.state.detail.action);
 
     const [inputs, setInputs] = useState({
         name: '',
@@ -44,7 +43,6 @@ export default function CategoryIngredientCreateEdit(props) {
     }) 
 
     useEffect(() => {
-    // console.log('CategoryCreateEdit(21):: category: ', props.location.state.detail.category.name);
 
         if (action !== 'crear') {
 
@@ -73,8 +71,6 @@ export default function CategoryIngredientCreateEdit(props) {
     }
 
     function showSubmitButton() {
-        // console.log(errors.name.length, errors.description.length);
-        // console.log(errors.name.length !== 0 || errors.description.length !== 0);
 
         if ((errors.name.length > 0 || errors.description.length > 0) || (action === 'ver'))
             return <Input type="submit" disabled/>
@@ -89,12 +85,10 @@ export default function CategoryIngredientCreateEdit(props) {
                 if (action === 'crear')
                     dispatch(newCategory(inputs))
                 else {
-                    // console.log('submitHandler(95):: oldName: ', oldName);
                     let endPointArgs = {
                         oldName,
                         category: inputs
                     }
-                    // console.log('submitHandler(100) endPointArgs: ', endPointArgs);
                     dispatch(modifyCategory(endPointArgs))
                     dispatch(showCategories)
                 }
@@ -104,12 +98,10 @@ export default function CategoryIngredientCreateEdit(props) {
                 if (action === 'crear')
                     dispatch(newIngredient(inputs))
                 else {
-                    // console.log('submitHandler(109):: oldName: ', oldName);
                     let endPointArgs = {
                         oldName,
                         ingredient: inputs
                     }
-                    // console.log('submitHandler(114) endPointArgs: ', endPointArgs);
                     dispatch(modifyIngredient(endPointArgs))
                     dispatch(showIngredients)
                 }

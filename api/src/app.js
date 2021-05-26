@@ -21,7 +21,6 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser("secret"));
 server.use(morgan("dev"));
 server.use((req, res, next) => {
-  //console.log("estoy logeado", req.isAuthenticated());
   res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");

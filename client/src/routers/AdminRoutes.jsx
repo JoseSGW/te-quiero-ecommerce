@@ -15,9 +15,6 @@ import UsersManagement from '../Pages/Admin/UsersManagement/UsersManagement';
 
 const AdminRoutes = (props) => {
 
-  // En este componente se añadiran las
-  // rutas / componentes (formularios) de
-  // creación de productos, usuarios, etc.
 
   return (
     <>

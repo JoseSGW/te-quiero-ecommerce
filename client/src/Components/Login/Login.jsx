@@ -87,7 +87,6 @@ export default function Login() {
 
         useEffect(()=>{
            if (data.data){
-                  console.log(data.data)
                if (data.data.msg=== "Successfully Authenticated"){
                    var id= data.data.id;
                    var name= data.data.name

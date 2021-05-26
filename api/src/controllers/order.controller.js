@@ -326,7 +326,6 @@ const checkoutOrder = async (req, res) => {
 const getProductsByUserId = async (req, res) => {
   const userId = req.params ? req.params.userId : null;
   const status = req.params.status ? req.params.status : "Open";
-  console.log();
   try {
     const products = await Order.findAll({
       where: {
@@ -372,7 +371,6 @@ const clearCart = async (req, res) => {
       },
     });
 
-    console.log(order);
 
     const order_details = await Order_details.destroy({
       where: {
@@ -401,7 +399,6 @@ const modifyOrder = async (req, res) => {
         const prod = await Product.findOne({
           where:{id:id}
         })
-        console.log('prod: ',prod,'PROD.STOCK: ',prod.stock,'QUANTITY: ',quantity)
         await Product.update({stock: (prod.stock-quantity)}, {
           where:{id:id},
           //busco que el producto exista
@@ -410,7 +407,6 @@ const modifyOrder = async (req, res) => {
         });
       }
     }
-    console.log(orderId, update);
     await Order.update(update, {
       where: {
         id: orderId,

@@ -7,7 +7,6 @@ export function showStores() {
         try {
             const response = await fetch("http://localhost:3001/stores/getStores");
             const jsonData = await response.json();
-            // console.log(jsonData);
             dispatch(setStores(jsonData));
             dispatch(finishLoading());
         } catch (error) {

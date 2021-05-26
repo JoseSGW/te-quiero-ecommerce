@@ -34,7 +34,6 @@ const addCategory = async(req, res) => {
         name: req.body.name,
         details: req.body.description
     };
-    console.log('addCategory (37):: category: ', category)
     if (category.name === '' || category.details === '') {
         res.status(404).json({ msg: "No ingresó la categoria" });
     } else {
@@ -48,7 +47,6 @@ const addCategory = async(req, res) => {
 
 // Ruta para modificar una categoria
 const modifyCategory = async(req, res) => {
-    console.log('modifyCategory (51):: req.body: ', req.body)
     const oldName = req.body.oldName; // newName es el nuevo nombre que se va a modificar
     const category = req.body.category; // category es la categoria que va a ser modificada
     await Category.update({
@@ -76,7 +74,6 @@ const deletedCategory = async(req, res) => {
             where: { name: nameCategory },
         });
         if (!category) {
-            console.log("entro 2");
             res.status(404).json({ msg: "La categoria no existe" });
         } else {
             await category.destroy();

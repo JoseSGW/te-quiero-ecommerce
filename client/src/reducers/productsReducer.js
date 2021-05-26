@@ -55,7 +55,6 @@ export const productsReducer = (state = initialState, action) => {
 
         case types.CART_FROM_BACK: //payload: [{id, quantity}]
             const products = action.payload
-            console.log(products)
             return {
                 ...state,
                 cart: products

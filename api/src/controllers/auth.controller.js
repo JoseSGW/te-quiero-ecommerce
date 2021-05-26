@@ -18,14 +18,11 @@ const passport = require("passport");
 const login = async (req, res, next) => {
   if (req.body.token) {
     const { token } = req.body;
-    //console.log("I'm the freaking token", token);
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.CLIENT_ID,
     });
     const { given_name, family_name, email, sub } = ticket.getPayload();
-    //console.log("payload:", ticket.getPayload());
-    //console.log("el email:", email)
     const hashedPassword = bcrypt.hash(sub, 10);
     const [ user ] = await User.findOrCreate({
       defaults: {
@@ -49,7 +46,6 @@ const login = async (req, res, next) => {
   } else {
     passport.authenticate("local", { session: true }, (err, user, info) => {
       if (err) throw err;
-      //console.log("soy el info", info);
       if (!user) res.status(200).json(info);
       else {
         req.login(user, (err) => {

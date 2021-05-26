@@ -7,14 +7,11 @@ const { login } = require("./auth.controller");
 
 const loginGoogle = async (req, res) => {
   const { token } = req.body;
-  //console.log("I'm the freaking token", token);
   const ticket = await client.verifyIdToken({
     idToken: token,
     audience: process.env.CLIENT_ID,
   });
   const { given_name, family_name, email, sub } = ticket.getPayload();
-  //console.log("payload:", ticket.getPayload());
-  //console.log("el email:", email)
   const hashedPassword = bcrypt.hash(sub, 10);
   const user = await User.findOrCreate({
     defaults: {
@@ -30,23 +27,6 @@ const loginGoogle = async (req, res) => {
     },
   });
   res.json(user);
-  //req.session.userId = User.id; //user o User??????
-  //console.log("soy el user creado", user)
-
-  // await login(user, user[0]),
-  //   (err) => {
-  //     console.log("req del await login", user);
-  //     if (err) throw err;
-  //     console.log("enviando", user);
-  //     res.status(200).json({
-  //       msg: "Successfully Authenticated",
-  //       admin: req.user.dataValues.admin,
-  //       name: req.user.dataValues.name,
-  //       id: req.user.dataValues.id,
-  //     });
-  //   };
-  // res.status(201);
-  // res.json(user);
 };
 
 // Check authentication middleware

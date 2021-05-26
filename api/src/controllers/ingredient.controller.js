@@ -34,7 +34,6 @@ const addIngredient = async(req, res) => {
         name: req.body.name,
         details: req.body.description
     };
-    console.log('addCategory (37):: ingredient: ', ingredient)
     if (ingredient.name === '' || ingredient.details === '') {
         res.status(404).json({ msg: "No ingresó el ingredient" });
     } else {
@@ -48,7 +47,6 @@ const addIngredient = async(req, res) => {
 
 // Ruta para modificar una categoria
 const modifyIngredient = async(req, res) => {
-    console.log('modifyIngredient (51):: req.body: ', req.body)
     const oldName = req.body.oldName; // newName es el nuevo nombre que se va a modificar
     const ingredient = req.body.ingredient; // category es la categoria que va a ser modificada
     await Ingredient.update({
@@ -76,7 +74,6 @@ const deletedIngredient = async(req, res) => {
             where: { name: nameIngredient },
         });
         if (!ingredient) {
-            console.log("entro 2");
             res.status(404).json({ msg: "El ingrediente no existe" });
         } else {
             await ingredient.destroy();

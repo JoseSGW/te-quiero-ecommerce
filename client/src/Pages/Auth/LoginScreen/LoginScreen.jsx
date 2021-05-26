@@ -97,11 +97,6 @@ export default function LoginScreen() {
   }
 
   function handleLogin(googleData) {
-    console.log(
-      JSON.stringify({
-        token: googleData.tokenId,
-      })
-    );
     axios({
       method: "post",
       data: {
