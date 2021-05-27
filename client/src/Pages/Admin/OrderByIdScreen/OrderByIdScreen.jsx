@@ -18,7 +18,6 @@ import {
 } from "../ProductsManagement/ProductsManagement.styles";
 import { useState } from "react";
 
-import axios from "axios";
 
 import { removeAll } from "../../../actions/shoppingActions";
 

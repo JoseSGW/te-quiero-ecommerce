@@ -9,7 +9,6 @@ const IngredientsManagement = () => {
   const { ingredients } = useSelector(state => state.ingredients);
   const { loading } = useSelector(state => state.loading);
   const history = useHistory()
-  // console.log('IngredientsManagement(12):: ingredients: ', ingredients);
 
   useEffect(() => {
     {ingredients.length === 0 && dispatch(showIngredients())}
