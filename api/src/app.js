@@ -6,6 +6,8 @@ const routes = require("./routes/index.js");
 const cors = require("cors");
 const passport = require("./config/passportConfig");
 const session = require("express-session");
+let path = require('path');
+
 require("./db.js");
 
 const server = express();
@@ -15,10 +17,14 @@ const { SESSION_SECRET } = process.env;
 server.use(express.json());
 
 server.name = "API";
+/* server.use(express.static(path.join(__dirname, '../build')));
+server.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+}); */
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
-server.use(cookieParser("secret"));
+server.use(cookieParser(SESSION_SECRET));
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
@@ -40,7 +46,7 @@ server.use(
 
 server.use(
   session({
-    secret: "secret",
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true
   })

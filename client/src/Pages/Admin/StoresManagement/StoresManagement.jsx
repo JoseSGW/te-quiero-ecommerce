@@ -28,17 +28,13 @@ const StoresManagement = () => {
       dispatch(showStores())
       document.querySelector('#modal').classList.remove('active');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
   
   return (
     <Container>
       <TopContainer>
-        {/* <form onSubmit={() => alert('Falta la logica')}>
-          <input type="text" placeholder='Buscar usuario'/>
-          <button>Buscar</button>
-        </form> */}
         <div></div>
         <button>Añadir Tienda</button>
       </TopContainer>

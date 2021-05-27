@@ -16,14 +16,18 @@ export const startLoadingProducts = () => {
   return async (dispatch) => {
     dispatch(startLoading());
     try {
-      const response = await fetch(`http://localhost:3001/products`);
+      const response = await fetch(`http://localhost:3001/products`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       const jsonData = await response.json();
-      // console.log('products(11) jsondata: ', jsonData)
       dispatch(setProducts(jsonData));
       dispatch(finishLoading());
       // dispatch(showReviewModal(false))
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(finishLoading());
     }
   };
@@ -83,22 +87,22 @@ export const cleanSearchProduct = () => {
 
 export function loadFilteredProducts(filterOptions) {
 
-    return function(dispatch) {
+  return function (dispatch) {
 
-        return (
-            axios
-            .get(`http://localhost:3001/products/categories?&data=${JSON.stringify(filterOptions)}`)
-            .then((res) => {
-                // console.log("llega desde los filtros", res.data)
-                dispatch(setProducts(res.data));
-                dispatch(finishLoading());
-            })
-            .catch((err) => {
-                console.log(err);
-                dispatch(finishLoading());
-            })
-        );
-    };
+    return (
+      axios
+        .get(`http://localhost:3001/products/categories?&data=${JSON.stringify(filterOptions)}`)
+        .then((res) => {
+          // console.log("llega desde los filtros", res.data)
+          dispatch(setProducts(res.data));
+          dispatch(finishLoading());
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(finishLoading());
+        })
+    );
+  };
 
 }
 
@@ -118,31 +122,31 @@ export const deleteProductById = (id) => {
 };
 
 export const updateProduct = (data) => {
-  return async(dispatch) => {
-      try {
-          const response = await fetch('http://localhost:3001/products/modifyProduct', {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data)
-          });
-          dispatch({ type: types.prodUpdate });
-          store.addNotification({
-              title: "Aviso!",
-              message: "Producto actualizado correctamente",
-              type: "success",
-              insert: "top",
-              container: "top-right",
-              animationIn: ["animate__animated", "animate__fadeIn"],
-              animationOut: ["animate__animated", "animate__fadeOut"],
-              dismiss: {
-              duration: 3000,
-              onScreen: true
-              }
-          });
-          dispatch({ type: types.prodImgClear });
-      } catch (error) {
-          alert('Producto no actualizado');
-          console.log(error.message);
+  return async (dispatch) => {
+    try {
+      const response = await fetch('http://localhost:3001/products/modifyProduct', {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      dispatch({ type: types.prodUpdate });
+      store.addNotification({
+        title: "Aviso!",
+        message: "Producto actualizado correctamente",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+          onScreen: true
+        }
+      });
+      dispatch({ type: types.prodImgClear });
+    } catch (error) {
+      alert('Producto no actualizado');
+      console.log(error.message);
     }
   };
 };
@@ -170,45 +174,45 @@ export const updateProductState = (imgUrl, indice) => {
 
 export const setImgsToImgsState = (imgs) => {
 
-    let imgsState = []; { imgs && imgs.filter(img => imgsState.push(img.name)) };
-    return (dispatch) => {
-        dispatch({
-            type: types.prodImgCharge,
-            payload: imgsState
-        })
-    }
+  let imgsState = []; { imgs && imgs.filter(img => imgsState.push(img.name)) };
+  return (dispatch) => {
+    dispatch({
+      type: types.prodImgCharge,
+      payload: imgsState
+    })
+  }
 }
 
 export const setUserFeaturedProductsActn = (data) => {
-    console.log('setUserFeaturedProductsActn:: LOAD_USER_FEATURED_PRODUCTS will be executed')
+  console.log('setUserFeaturedProductsActn:: LOAD_USER_FEATURED_PRODUCTS will be executed')
 
-    return {
-        type: types.LOAD_USER_FEATURED_PRODUCTS,
-        payload: data
-    }
+  return {
+    type: types.LOAD_USER_FEATURED_PRODUCTS,
+    payload: data
+  }
 }
 
 export function loadUserFeaturedProducts(userId) {
-    return function(dispatch) {
-        // console.log('loadUserFeaturedProducts:: voy a axios.get...')
-        return (
-            axios.get(`http://localhost:3001/orders/getUserCompleteOrdersRelatedProducts/${userId}`)
-            .then((res) => {
-                // console.log(`loadUserFeaturedProducts:: voy a setUserFeaturedProductsActn, data: ${res.data}`)
-                dispatch(setUserFeaturedProductsActn(res.data));
-            })
-            .catch((err) => {
-                console.log(`loadUserFeaturedProducts:: Error:  ${err}`)
-            })
-            .finally(() => console.log('loadUserFeaturedProducts:: listo!'))
-        );
-    };
+  return function (dispatch) {
+    // console.log('loadUserFeaturedProducts:: voy a axios.get...')
+    return (
+      axios.get(`http://localhost:3001/orders/getUserCompleteOrdersRelatedProducts/${userId}`)
+        .then((res) => {
+          // console.log(`loadUserFeaturedProducts:: voy a setUserFeaturedProductsActn, data: ${res.data}`)
+          dispatch(setUserFeaturedProductsActn(res.data));
+        })
+        .catch((err) => {
+          console.log(`loadUserFeaturedProducts:: Error:  ${err}`)
+        })
+        .finally(() => console.log('loadUserFeaturedProducts:: listo!'))
+    );
+  };
 }
 
 export const clearUserFeaturedProductsActn = () => {
 
-    return {
-        type: types.CLEAR_USER_FEATURED_PRODUCTS,
-    }
+  return {
+    type: types.CLEAR_USER_FEATURED_PRODUCTS,
+  }
 }
 
