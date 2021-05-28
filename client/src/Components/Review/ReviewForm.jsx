@@ -6,13 +6,11 @@ import {
   ContainerFlex,
 } from "./ReviewForm.styles";
 import { useSelector, useDispatch } from "react-redux";
-// import GradeIcon from '@material-ui/icons/Grade';
 import { addReview, updateReview } from "../../actions/reviewsActions";
 import { showReviewModalActn } from "../../actions/reviewsActions";
 import { useHistory } from "react-router-dom";
 
 export default function ReviewForm() {
-  const { showReviewModal } = useSelector((state) => state.reviews);
   const { fullReviewToSave } = useSelector((state) => state.reviews);
   const { willEditReview } = useSelector((state) => state.reviews);
 
@@ -23,8 +21,6 @@ export default function ReviewForm() {
     rating: 0,
     userId: "",
   });
-
-  const possibleReviews = [1, 2, 3, 4, 5];
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,13 +36,6 @@ export default function ReviewForm() {
     });
   }
 
-  //  const fullReview =  {
-  //     id: id,
-  //     rating: rating,
-  //     userId: userId,
-  //     description: description,
-  //     name
-  // }
 
   useEffect(() => {
     if (willEditReview) {
@@ -70,8 +59,6 @@ export default function ReviewForm() {
       description: e.target.value,
     });
   }
-
-  const prodId = history.location.pathname.slice(16);
 
   function handleSubmit(e) {
     e.preventDefault();

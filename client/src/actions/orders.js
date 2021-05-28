@@ -16,11 +16,10 @@ export const startLoadingOrders = (status) => {
         `http://localhost:3001/orders?status=${status}`
       );
       const jsonData = await response.json();
-      // console.log('products(11) jsondata: ', jsonData)
       dispatch(setOrders(jsonData));
       dispatch(finishLoading());
     } catch (error) {
-      // console.log(error);
+      // (error);
       dispatch(finishLoading());
     }
   };
@@ -39,11 +38,10 @@ export const startLoadingOrderById = (id) => {
     try {
       const response = await fetch(`http://localhost:3001/orders/order/${id}`);
       const jsonData = await response.json();
-      // console.log('products(11) jsondata: ', jsonData)
       dispatch(setOrderById(jsonData));
       dispatch(finishLoading());
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(finishLoading());
     }
   };
@@ -63,7 +61,7 @@ export const deleteOrderById = (id) => {
       // await fetch(`http://localhost:3001/orders/order/${id}`);
       dispatch(finishLoader());
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(finishLoader());
     }
   };
@@ -92,7 +90,7 @@ export const updateOrderById = (id, body) => {
             });
         } catch (error) {
             alert('Producto no actualizado');
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 }
@@ -109,7 +107,7 @@ export const startLoadingOrdersByUser = (id) => {
       dispatch(setUserOrders(jsonData));
       dispatch(finishLoading());
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(finishLoading());
     }
   };

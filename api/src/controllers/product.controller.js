@@ -25,7 +25,7 @@ const getProduct = (req, res, next) => {
     ],
   })
     .then((products) => {
-      res.send(products);
+      res.json(products);
     })
     .catch(next);
 };

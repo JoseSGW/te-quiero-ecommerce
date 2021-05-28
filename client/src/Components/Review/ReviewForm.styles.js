@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Imagen = styled.div `
+export const Imagen = styled.div`
     display: flex;
     padding-right: 1rem;
     padding-top: 1rem;
@@ -11,15 +11,15 @@ export const Imagen = styled.div `
         height: 4.5rem;
     }
 `;
-export const ContainerFlex = styled.div `
+export const ContainerFlex = styled.div`
     display: flex;
     justify-content: center;
     padding:5%;
     button{
-         padding 2%;
+         padding: 2%;
     }
          `;
-export const Texto = styled.div `
+export const Texto = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -33,7 +33,7 @@ export const Texto = styled.div `
     }
 `;
 
-export const ContainerReviewForm = styled.div `
+export const ContainerReviewForm = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: center;

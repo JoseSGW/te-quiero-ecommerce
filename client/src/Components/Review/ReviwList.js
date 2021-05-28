@@ -15,7 +15,6 @@ const { reviews } = useSelector((state) => state.reviews);
 const prodId = history.location.pathname.slice(16);
 
 useEffect(() => {
-    console.log("Se dispatchea")
     dispatch(get_reviews(prodId))
 }, []);
 

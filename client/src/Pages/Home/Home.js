@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import { SliderData } from "../../Components/ImageSlider/SliderData";
 import ImageSlider from "../../Components/ImageSlider/ImageSlider";
 import {
-  Ultimos,
   HomeFlex,
   Title,
   Card,
   Row,
-  ImageInCard,
   MiniCards,
   MiniCard,
   Te,
-  MiniCardImage,
-  MiniCardSpan,
 } from "./Home.styled";
 import Verde from "../../img/te-verde.png";
 import Azul from "../../img/te-azul.png";
@@ -21,11 +17,10 @@ import Amarillo from "../../img/te-amarillo.png";
 import Rojo from "../../img/te-rojo.png";
 import Blanco from "../../img/te-blanco.png";
 
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   loadFilteredProducts,
   loadUserFeaturedProducts,
-  setProduct,
   startLoadingProducts,
 } from "../../actions/products";
 
@@ -37,18 +32,16 @@ import {
 } from "../Admin/ProductsManagement/ProductsManagement.styles";
 import { removeAll } from "../../actions/shoppingActions";
 
-import axios from "axios";
 
 import {
-  startLoadingOrdersByUser,
   updateOrderById,
 } from "../../actions/orders";
 
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import { store } from 'react-notifications-component';
 
 
 export default function Home() {
+  console.log("me monte en la primera linea")
   const history = useHistory();
   const dispatch = useDispatch();
   const { search } = useLocation();
@@ -62,7 +55,11 @@ export default function Home() {
   );
 
   useEffect(() => {
+    console.log("me ejecute")
     dispatch(startLoadingProducts());
+    return () => {
+      console.log("me desmonte")
+    }
   }, []);
 
   const goColor = (e, color) => {
@@ -86,8 +83,8 @@ export default function Home() {
       animationIn: ["animate__animated", "animate__fadeIn"],
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {
-      duration: 3000,
-      onScreen: true
+        duration: 3000,
+        onScreen: true
       }
     });
   };
@@ -101,9 +98,9 @@ export default function Home() {
 
   const last = products.length - 1;
 
-  useEffect(() => {
-    dispatch(startLoadingProducts());
-  }, []);
+  /*  useEffect(() => {
+     dispatch(startLoadingProducts());
+   }, []); */
 
   useEffect(() => {
     const openOrder =
@@ -111,11 +108,9 @@ export default function Home() {
       ordersByUserId.filter((ord) => ord.status === "Open");
     if (search.includes("in_process")) {
       const body = { status: "InProcess" };
-      // document.querySelector("#MPStatus").classList.add("active");
       dispatch(removeAll());
       notificationMessage("Tu compra esta en proceso");
-      setTimeout(() => {
-        // document.querySelector("#MPStatus").classList.remove("active");
+      var inProces = setTimeout(() => {
         {
           openOrder && dispatch(updateOrderById(openOrder[0].id, body));
         }
@@ -126,7 +121,7 @@ export default function Home() {
 
       dispatch(removeAll());
       notificationMessage("Tu compra fue aprobada");
-      setTimeout(() => {
+      var approved = setTimeout(() => {
         {
           openOrder && dispatch(updateOrderById(openOrder[0].id, body));
         }
@@ -134,9 +129,15 @@ export default function Home() {
       }, 3000);
     } else if (search.includes("rejected")) {
       notificationMessage("Tu compra fue rechazada");
-      setTimeout(() => {
+      var rejected = setTimeout(() => {
         history.replace("/Cart");
       }, 3000);
+    }
+
+    return () => {
+      clearTimeout(inProces);
+      clearTimeout(approved);
+      clearTimeout(rejected);
     }
   }, [ordersByUserId]);
 
@@ -148,6 +149,7 @@ export default function Home() {
   const goToProductDetail = (prodId) => {
     history.push(`/product/detail/${prodId}`);
   };
+
 
   const showHoyQuieroOColores = () => {
     return (
@@ -234,14 +236,14 @@ export default function Home() {
         <h1>Últimos agregados</h1>
       </Title>
       <Te>
-        {products && products.length > 0 && products[last] && (
+        {products.length > 6 && (
           <Row>
             <Card
               onClick={(e) =>
                 history.push(`/products/details/${products[last].id}`)
               }
             >
-              <img src={products[last].images[0].name}></img>
+              <img src={products[last].images[0] && products[last].images[0].name}></img>
               <span>{products[last].name}</span>
             </Card>
             <Card
@@ -249,7 +251,7 @@ export default function Home() {
                 history.push(`/products/details/${products[last - 1].id}`)
               }
             >
-              <img src={products[last - 1].images[0].name}></img>
+              <img src={products[last - 1].images[0] && products[last - 1].images[0].name}></img>
               <span>{products[last - 1].name}</span>
             </Card>
             <Card
@@ -257,7 +259,7 @@ export default function Home() {
                 history.push(`/products/details/${products[last - 2].id}`)
               }
             >
-              <img src={products[last - 2].images[0].name}></img>
+              <img src={products[last - 2].images[0] && products[last - 2].images[0].name}></img>
               <span>{products[last - 2].name}</span>
             </Card>
             <Card
@@ -265,7 +267,7 @@ export default function Home() {
                 history.push(`/products/details/${products[last - 3].id}`)
               }
             >
-              <img src={products[last - 3].images[0].name}></img>
+              <img src={products[last - 3].images[0] && products[last - 3].images[0].name}></img>
               <span>{products[last - 3].name}</span>
             </Card>
             <Card

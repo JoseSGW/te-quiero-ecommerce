@@ -11,13 +11,7 @@ export default function Review({id, rating, description, userId, name}) {
 
     rating = Number(rating)
     const myRating = rating
-    console.log('Review:: rating: ', rating);
     const { user } = useSelector((state) => state.users)
-    // console.log('review (10):: name: ', name)
-    // console.log('review (11):: userId: ', userId)
-    // console.log('review (12):: description: ', description)
-    // console.log('review (13):: rating: ', rating)
-    // console.log('review (14):: id: ', id)
 
     function handleEditClick(e) {
         const fullReview =  {
@@ -26,7 +20,6 @@ export default function Review({id, rating, description, userId, name}) {
             rating: myRating,
             description: description, 
         }
-        console.log('handleEditClick:: rating: ', fullReview.rating)
         dispatch(showReviewModalActn(true, true, fullReview))
         document.querySelector('#modal').classList.add('active');
     }

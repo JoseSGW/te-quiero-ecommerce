@@ -1,6 +1,3 @@
-const server = require("express").Router();
-const Sequelize = require("sequelize");
-const op = Sequelize.Op;
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.CLIENT_ID);
 const bcrypt = require("bcryptjs");

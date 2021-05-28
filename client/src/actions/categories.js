@@ -2,16 +2,20 @@ import { types } from "../types/types";
 import { finishLoading, startLoading } from "./loading";
 
 export function showCategories() {
-    return async function(dispatch) {
+    return async function (dispatch) {
         dispatch(startLoading());
         try {
-            const response = await fetch("http://localhost:3001/categories/allCategories");
+            const response = await fetch("http://localhost:3001/categories/allCategories", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             const jsonData = await response.json();
-            // console.log(jsonData);
             dispatch(setCategories(jsonData));
             dispatch(finishLoading());
         } catch (error) {
-            console.log(error);
+            console.error(error);
             dispatch(finishLoading());
         }
     };
@@ -25,21 +29,21 @@ export const setCategories = (categories) => {
 };
 
 export const deleteCategoryByName = (name) => {
-    return async() => {
+    return async () => {
         try {
             const res = await fetch(`http://localhost:3001/categories/deletedCategory/${name}`, {
                 method: "DELETE",
             });
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 }
 
 export const newCategory = (category) => {
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
-            
+
             const rawResponse = await fetch('http://localhost:3001/categories/addCategory', {
                 method: 'POST',
                 headers: {
@@ -48,21 +52,20 @@ export const newCategory = (category) => {
                 },
                 body: JSON.stringify(category)
             });
-            
+
             dispatch(showCategories());
 
         } catch (err) {
-            
 
-            console.log(err)
+
+            console.error(err)
         }
     }
 };
 
 export const modifyCategory = (endPointArgs) => {
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
-            // console.log('modifyCategory(63):: endPointArgs: ', endPointArgs)
             const rawResponse = await fetch('http://localhost:3001/categories/modifyCategory', {
                 method: 'PUT',
                 headers: {
@@ -71,11 +74,10 @@ export const modifyCategory = (endPointArgs) => {
                 },
                 body: JSON.stringify(endPointArgs)
             });
-            // console.log('modifyCategory (72):: returned from fetch')
             dispatch(showCategories());
 
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 };

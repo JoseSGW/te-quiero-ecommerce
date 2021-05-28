@@ -6,7 +6,6 @@ import {
   startLoading,
 } from "./loading";
 import { imgUpload } from "../helpers/imgUpload";
-import { showReviewModal } from "./showReviewModal";
 
 import { store } from 'react-notifications-component';
 
@@ -25,7 +24,6 @@ export const startLoadingProducts = () => {
       const jsonData = await response.json();
       dispatch(setProducts(jsonData));
       dispatch(finishLoading());
-      // dispatch(showReviewModal(false))
     } catch (error) {
       console.error(error);
       dispatch(finishLoading());
@@ -44,13 +42,18 @@ export function get_detail(id) {
   return async (dispatch) => {
     dispatch(startLoading());
     try {
-      const res = await fetch(`http://localhost:3001/products/${id}`);
+      const res = await fetch(`http://localhost:3001/products/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       const jsonData = await res.json();
 
       dispatch(setProduct(jsonData[0]));
       dispatch(finishLoading());
     } catch (err) {
-      console.log(err);
+      console.error(err);
       dispatch(finishLoading());
     }
   };
@@ -66,9 +69,13 @@ export const setProduct = (product) => {
 export function searchProduct(keyword) {
   return async function (dispatch) {
     return await fetch(
-      `http://localhost:3001/products/search/?keyword=${keyword}`,
-      { credentials: "include" }
-    )
+      `http://localhost:3001/products/search/?keyword=${keyword}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: "include"
+    })
       .then((response) => response.json())
       .then((product) => {
         dispatch({
@@ -93,12 +100,11 @@ export function loadFilteredProducts(filterOptions) {
       axios
         .get(`http://localhost:3001/products/categories?&data=${JSON.stringify(filterOptions)}`)
         .then((res) => {
-          // console.log("llega desde los filtros", res.data)
           dispatch(setProducts(res.data));
           dispatch(finishLoading());
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           dispatch(finishLoading());
         })
     );
@@ -116,7 +122,7 @@ export const deleteProductById = (id) => {
         }
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 };
@@ -146,7 +152,7 @@ export const updateProduct = (data) => {
       dispatch({ type: types.prodImgClear });
     } catch (error) {
       alert('Producto no actualizado');
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 };
@@ -159,7 +165,7 @@ export const startUploadingImg = (file, indice) => {
       await dispatch(updateProductState(imgUrl, indice));
       dispatch(finishLoader());
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(finishLoader());
     }
   };
@@ -184,7 +190,6 @@ export const setImgsToImgsState = (imgs) => {
 }
 
 export const setUserFeaturedProductsActn = (data) => {
-  console.log('setUserFeaturedProductsActn:: LOAD_USER_FEATURED_PRODUCTS will be executed')
 
   return {
     type: types.LOAD_USER_FEATURED_PRODUCTS,
@@ -194,17 +199,15 @@ export const setUserFeaturedProductsActn = (data) => {
 
 export function loadUserFeaturedProducts(userId) {
   return function (dispatch) {
-    // console.log('loadUserFeaturedProducts:: voy a axios.get...')
     return (
       axios.get(`http://localhost:3001/orders/getUserCompleteOrdersRelatedProducts/${userId}`)
         .then((res) => {
-          // console.log(`loadUserFeaturedProducts:: voy a setUserFeaturedProductsActn, data: ${res.data}`)
           dispatch(setUserFeaturedProductsActn(res.data));
         })
         .catch((err) => {
-          console.log(`loadUserFeaturedProducts:: Error:  ${err}`)
+          console.error(`loadUserFeaturedProducts:: Error:  ${err}`)
         })
-        .finally(() => console.log('loadUserFeaturedProducts:: listo!'))
+        .finally(() => console.error('loadUserFeaturedProducts:: listo!'))
     );
   };
 }

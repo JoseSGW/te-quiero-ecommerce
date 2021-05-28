@@ -17,10 +17,8 @@ const { SESSION_SECRET } = process.env;
 server.use(express.json());
 
 server.name = "API";
-/* server.use(express.static(path.join(__dirname, '../build')));
-server.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-}); */
+server.use(express.static(path.join(__dirname, '../build')));
+
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
@@ -64,6 +62,10 @@ server.use((err, req, res, next) => {
   const message = err.message || err;
   console.error(err);
   res.status(status).send(message);
+});
+
+server.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 module.exports = server;
